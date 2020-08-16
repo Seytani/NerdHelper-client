@@ -1,16 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TopBar from './components/site/TopBar';
-import SignUp from './Auth/SignUp';
+import Auth from './Auth/Auth';
+import Topics from './components/site/Topics';
 
 function App() {
   const [sessionToken, setSessionToken] = useState('');
+  const [isLoggedIn, setIsLoggedIn] =useState(false);
 
+  useEffect(() => {
+    if(localStorage.getItem('token')) {
+      setSessionToken(localStorage.getItem('token'));
+      setIsLoggedIn(true);
+    }
+  }, [])
+
+  const updateToken = (newToken) => {
+    localStorage.setItem('token', newToken);
+    setSessionToken(newToken);
+    setIsLoggedIn(true);
+  };
+
+  const clearToken = () => {
+    localStorage.clear();
+    setSessionToken('');
+    setIsLoggedIn(false);
+  };
   
+  //protected views goes here
 
   return (
     <div>
-      <TopBar/>
-      <SignUp/>
+      <TopBar isLoggedIn={isLoggedIn} logout={clearToken}/>
+      {isLoggedIn ? <Topics token={sessionToken}/> : <Auth isLoggedIn={isLoggedIn} updateToken={updateToken}/>}
+
     </div>
   );
 }

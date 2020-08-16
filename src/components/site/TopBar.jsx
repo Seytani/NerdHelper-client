@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import {
-    Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,
-    NavLink,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem,NavbarText, Button
+    Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem,
+    NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Button
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlasses } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,45 @@ const TopBar = (props) => {
 
     const toggle = () => setIsOpen(!isOpen);
 
+    function activeSession(active) {
+        if (active) {
+            return (
+                <Fragment>
+                    <NavItem>
+                        <NavLink href="/components/">Topics</NavLink>
+                    </NavItem>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
+                            Views
+                </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem>
+                                Caroussel Study
+                </DropdownItem>
+                            <DropdownItem divider />
+                            <DropdownItem>
+                                Flash Cards
+                </DropdownItem>
+                            <DropdownItem divider />
+                            <DropdownItem>
+                                Quiz
+                </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                    {/* <NavbarText>Welcome "User"</NavbarText>
+                    <Button className="ml-3">Logout</Button> */}
+                    <Button className="ml-3" id="Logout" onClick={props.logout}>Logout</Button>
+                </Fragment>
+            );
+        } else {
+            return (
+                <Fragment>
+                    <Button className="btn d-flex justify-content-between" id="signupLogin">Sign Up / Login</Button>
+                </Fragment>);
+        }
+    }
+
+
     return (
         <div>
             <Navbar color="dark" light expand="md">
@@ -19,31 +58,8 @@ const TopBar = (props) => {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
-                        <NavItem>
-                            <NavLink href="/components/">Topics</NavLink>
-                        </NavItem>
-                        <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret>
-                                Views
-                            </DropdownToggle>
-                            <DropdownMenu right>
-                                <DropdownItem>
-                                    Caroussel Study 
-                </DropdownItem>
-                                <DropdownItem divider />
-                                <DropdownItem>
-                                    Flash Cards
-                </DropdownItem>
-                                <DropdownItem divider />
-                                <DropdownItem>
-                                    Quiz
-                </DropdownItem>
-                            </DropdownMenu>
-                        </UncontrolledDropdown>
+                        {activeSession(props.isLoggedIn)}
                     </Nav>
-                    <Button className="ml-3" id="signupLogin">Sign Up / Login</Button>
-                    {/* <NavbarText>Welcome "User"</NavbarText>
-                    <Button className="ml-3">Logout</Button> */}
                 </Collapse>
             </Navbar>
         </div>
