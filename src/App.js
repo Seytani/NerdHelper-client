@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import TopBar from './components/site/TopBar';
+import TopBar from './site/TopBar';
 import Auth from './Auth/Auth';
-import Topics from './components/site/Topics';
+import Topics from './site/Topics';
 
 function App() {
   const [sessionToken, setSessionToken] = useState('');

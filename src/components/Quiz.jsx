@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Nav = () => {
+const Quiz = (props) => {
 
 
     return(
@@ -10,4 +10,4 @@ const Nav = () => {
     );
 }
 
-export default Nav;
+export default Quiz;
