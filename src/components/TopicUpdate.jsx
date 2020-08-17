@@ -24,7 +24,7 @@ const TopicUpdate = (props) => {
 
     return (
         <div>
-            <Button onClick={() => { setOpen(true); setDimmer('blurring') }}>
+            <Button basic color='pink' onClick={() => { setOpen(true); setDimmer('blurring') }}>
                 Rename
         </Button>
 

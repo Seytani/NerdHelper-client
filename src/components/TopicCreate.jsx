@@ -24,7 +24,7 @@ const TopicCreate = (props) => {
         <div>
             <Button content='Add Topic' onClick={handleClick} />
             <Input icon={<Icon name='plus' link onClick={handleSubmit} />}
-                onChange={e => setTopicName(e.target.value)} ref={inputRef} placeholder='Search...' />
+                onChange={e => setTopicName(e.target.value)} ref={inputRef} placeholder='Enter New Topic Name...' />
         </div>
     );
 }

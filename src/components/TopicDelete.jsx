@@ -25,7 +25,7 @@ const TopicDelete = (props) => {
                 onOpen={() => setOpen(true)}
                 open={open}
                 size='small'
-                trigger={<Button>Delete</Button>}
+                trigger={<Button basic color='red'>Delete</Button>}
                 style={{ textAlign: 'center' }}
             >
                 <Header icon>
@@ -36,7 +36,7 @@ const TopicDelete = (props) => {
                     <h3>Are you sure you want to proceed?</h3>
                 </Modal.Content>
                 <Modal.Actions style={{ textAlign: 'center' }}>
-                    <Button basic color='red' inverted onClick={() => setOpen(false)}>
+                    <Button basic color='yellow' inverted onClick={() => setOpen(false)}>
                         <Icon name='remove' /> No
                     </Button>
                     <Button color='red' inverted onClick={handleSubmit}>

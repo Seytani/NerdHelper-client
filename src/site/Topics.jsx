@@ -32,11 +32,13 @@ const Topics = (props) => {
 
     return (
         <div>
-            <h3>Study Topics</h3>
+        <div style={{textAlign: 'center'}}>
+            <h1>Study Topics</h1>
+            <TopicCreate token={props.token} fetchTopics={fetchTopics} />
+        </div>
             <Grid columns={4}>
                 <Grid.Row>  {topics.map(topic => pullColumn(topic))}</Grid.Row>
             </Grid>
-            <TopicCreate token={props.token} fetchTopics={fetchTopics} />
         </div>
     );
 }
