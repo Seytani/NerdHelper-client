@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import TopBar from './site/TopBar';
 import Auth from './Auth/Auth';
 import Topics from './site/Topics';
@@ -26,23 +27,19 @@ function App() {
     setIsLoggedIn(false);
   };
   
-  //protected views goes here
-
   return (
     <div>
-      <TopBar isLoggedIn={isLoggedIn} logout={clearToken}/>
-      {isLoggedIn ? <Topics token={sessionToken}/> : <Auth isLoggedIn={isLoggedIn} updateToken={updateToken}/>}
+   
 
+
+    <Router>
+      <TopBar isLoggedIn={isLoggedIn} logout={clearToken}/>
+      <Switch>
+        <Route path='/topics' component={Topics}/>
+      </Switch>
+    </Router>
     </div>
   );
 }
 
 export default App;
-
-
-//use effect to get token from local storage and set it in out state
-//update token function (sets in local storage, sets state)
-//clartoken funct (always habdle both sides)
-//fuinction for protectedViews (ternary that shows component if user logged in/not)
-//returns the navvar, with the logout button a funtion is passed as  a prop, guess which one?
-//returns the component decided by the ternary in function before if user is logged in.

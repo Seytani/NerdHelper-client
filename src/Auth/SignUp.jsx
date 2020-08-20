@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import { Route, Link, Switch, BrowserRouter } from 'react-router-dom';
-import Login from './Login';
 
 const SignUp = (props) => {
     const [name, setName] = useState('');
@@ -39,14 +37,6 @@ const SignUp = (props) => {
             </FormGroup>
             <Button type='submit'>Sign Up</Button>
         </Form>
-        {/* <div>
-        <p>Already have an account? </p> 
-        <BrowserRouter><Link to='/login'>Log in</Link>
-        <Switch>
-            <Route exact path="/login"><Login/></Route>
-        </Switch>
-        </BrowserRouter>
-        </div> */}
         </div>
     );
 }
