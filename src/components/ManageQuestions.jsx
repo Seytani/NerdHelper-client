@@ -10,25 +10,29 @@ class ManageQuestions extends Component {
     }
     this.fetchQuestions=this.fetchQuestions.bind(this);
 }
-    componentWillMount() {
-        console.log('manage questions---', this.props.location);
-    }
-    fetchQuestions() {
-        fetch(`http://localhost:3001/topics/view-topic/1`, {
-            method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
-            })
+fetchQuestions() {
+    console.log(this.props.location)
+    fetch(`http://localhost:3001/topics/view-topic/${this.props.location.topic.id}`, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
         })
-            .then(res => res.json()).then(data => { this.setState({questions: data}); console.log(data) })
-    };
+    })
+    .then(res => res.json()).then(data => { this.setState({questions: data.questions}); console.log('FROM FETCH', data.questions) })
+}
 
+
+
+componentWillMount() {
+    console.log('test');
+    this.fetchQuestions();
+    console.log('manage questions---', this.state.questions);
+}
 
     render() {
         return (
             <div>
-            <h1>{}</h1>
             <Button basic color='yellow' onClick={this.fetchQuestions}>Manage Questions </Button>
         </div>
         )

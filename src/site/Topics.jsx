@@ -17,7 +17,6 @@ export default class Topics extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props)
         this.fetchTopics();
     }
 
@@ -34,7 +33,6 @@ export default class Topics extends Component {
 
     toQuestion(id) {
         let currentTopic = this.state.topics[this.state.topics.findIndex(element => element.id === id)];
-        console.log('currentTopic', currentTopic);
         this.props.history.push({
             pathname: `${this.props.match.path}/${id}/questions`,
             topic: currentTopic
@@ -62,8 +60,7 @@ export default class Topics extends Component {
                             <Grid.Row>  {this.state.topics.map(topic => this.pullColumn(topic))}</Grid.Row>
                         </Grid>
                     </Route>
-                    <Route path={`${this.props.match.path}/:topicId/questions`} component={ManageQuestions}>
-                    </Route>
+                    <Route path={`${this.props.match.path}/:topicId/questions`} component={ManageQuestions} />
                 </Switch>
             </div>
         )

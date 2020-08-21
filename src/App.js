@@ -1,45 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useState, useEffect, Component } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import TopBar from './site/TopBar';
 import Auth from './Auth/Auth';
 import Topics from './site/Topics';
+import ManageQuestions from './components/ManageQuestions'
+import ProtectedRoute from './Auth/ProtectedRoute';
 
-function App() {
-  const [sessionToken, setSessionToken] = useState('');
-  const [isLoggedIn, setIsLoggedIn] =useState(false);
-
-  useEffect(() => {
-    if(localStorage.getItem('token')) {
-      setSessionToken(localStorage.getItem('token'));
-      setIsLoggedIn(true);
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sessionToken: '',
+      isLoggedIn: false
     }
-  }, [])
+    this.updateToken=this.updateToken.bind(this);
+    this.clearToken=this.clearToken.bind(this);
+    // this.toAuth=this.toAuth.bind(this);
+  }
 
-  const updateToken = (newToken) => {
+  componentWillMount() {
+    if (localStorage.getItem('token')) {
+      this.setState({ sessiontoken: localStorage.getItem('token') });
+      this.setState({ isLoggedIn: true });
+    }
+  }
+
+  updateToken(newToken) {
     localStorage.setItem('token', newToken);
-    setSessionToken(newToken);
-    setIsLoggedIn(true);
+    this.setState({ sessiontoken: newToken });
+    this.setState({ isLoggedIn: true });
   };
 
-  const clearToken = () => {
+  clearToken() {
     localStorage.clear();
-    setSessionToken('');
-    setIsLoggedIn(false);
+    this.setState({ sessiontoken: '' });
+    this.setState({ isLoggedIn: false });
   };
-  
-  return (
-    <div>
-   
+
+//   toAuth() {
+//     this.props.history.push({
+//         pathname: `${this.props.match.path}/auth`,
+//         isLoggedIn: this.isLoggedIn,
+//         updateToken: this.updateToken
+//     });
+//     return (<Auth/>)
+// }
+
+  render() {
+    
+    return (
+      <div>
+      {/* {this.isLoggedIn ? this.props.history.push({pathname: '/auth'}) : this.props.history.push({pathname: '/topics'})} */}
 
 
-    <Router>
-      <TopBar isLoggedIn={isLoggedIn} logout={clearToken}/>
-      <Switch>
-        <Route path='/topics' component={Topics}/>
-      </Switch>
-    </Router>
-    </div>
-  );
+
+        <Router>
+          <TopBar isLoggedIn={this.state.isLoggedIn} logout={this.clearToken} />
+          <Switch>
+            <Redirect exact from="/" to="/topics" />
+            <ProtectedRoute path='/topics' component={Topics} />
+            <Route path='/auth' component={Auth} />
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -5,10 +5,8 @@ import TopicUpdate from './TopicUpdate';
 import TopicDelete from './TopicDelete';
 
 const TopicCard = (props) => {
-    let match = useRouteMatch();
 
     let handleClick = () => {
-        console.log(match);
         props.toQuestion(props.topic.id);
     }
     return (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import { Form } from 'semantic-ui-react';
 
 const SignUp = (props) => {
     const [name, setName] = useState('');
@@ -17,25 +17,25 @@ const SignUp = (props) => {
     }
 
     return (
-        <div>
+        <div style={{padding: '2em'}}>
         <h1> Sign Up</h1> <br/>
         <Form onSubmit={handleSubmit}>
-            <FormGroup>
-                <Label for="examplePassword">Name</Label>
-                <Input type="name" name="name" id="name" placeholder="Enter your real name or super hero name" 
-                onChange={e => setName(e.target.value)}/>
-            </FormGroup>
-            <FormGroup>
-                <Label for="exampleEmail">Email</Label>
-                <Input type="email" name="email" id="email" placeholder="Enter you email address" 
-                onChange={e => setEmail(e.target.value)}/>
-            </FormGroup>
-            <FormGroup>
-                <Label for="examplePassword">Password</Label>
-                <Input type="password" name="password" id="password" placeholder="Enter Password" 
-                onChange={e => setPassword(e.target.value)}/>
-            </FormGroup>
-            <Button type='submit'>Sign Up</Button>
+            <Form.Field required>
+                <label for="name">Name</label>
+                <Form.Input type="text" name="name" id="name" placeholder="Enter name" 
+                width={6} onChange={e => setName(e.target.value)} required/>
+            </Form.Field>
+            <Form.Field required>
+                <label for="email">Email</label>
+                <Form.Input type="email" name="email" id="email" placeholder="Enter you email address" 
+                width={6} onChange={e => setEmail(e.target.value)}/>
+            </Form.Field>
+            <Form.Field required>
+                <label for="password">Password</label>
+                <Form.Input type="password" name="password" id="password" placeholder="Enter Password" 
+                width={6} minLength="6" onChange={e => setPassword(e.target.value)}/>
+            </Form.Field>
+            <Form.Button type='submit'>Sign Up</Form.Button>
         </Form>
         </div>
     );

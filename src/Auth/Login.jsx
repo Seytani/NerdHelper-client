@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, Button } from 'semantic-ui-react';
 
 const Login = (props) => {
     const [email, setEmail] = useState('');
@@ -14,26 +14,29 @@ const Login = (props) => {
                 'Content-Type': 'application/json'
             })
         })
-        .then(res => res.json()).then(data => props.updateToken(data.sessionToken))
+            .then(res => res.json()).then(data => localStorage.setItem('token', data.sessionToken))
     }
 
     return (
-        <div>
-            <h1>Login</h1> <br/>
-        <Form onSubmit={handleSubmit}>
-            <FormGroup>
-                <Label for="email">Email</Label>
-                <Input type="email" name="email" id="email" placeholder="Enter you email address" 
-                onChange={e => setEmail(e.target.value)} />
-            </FormGroup>
-            <FormGroup>
-                <Label for="password">Password</Label>
-                <Input type="password" name="password" id="password" placeholder="Enter Password" 
-                onChange={e => setPassword(e.target.value)}/>
-            </FormGroup>
-            <Button type='submit'>Login</Button>
-        </Form>
-        
+        <div style={{ padding: '2em' }}>
+            <h1>Login</h1> <br />
+            <Form onSubmit={handleSubmit}>
+                <Form.Field required>
+                    <label for="email">Email</label>
+                    <Form.Input type="email" name="email" id="email" placeholder="Enter you email address"
+                        width={6}
+                        onChange={e => setEmail(e.target.value)} />
+                </Form.Field>
+                <Form.Field>
+                    <label for="password">Password</label>
+                    <Form.Input type="password" name="password" id="password" placeholder="Enter Password"
+                        minLength="6"
+                        width={6}
+                        onChange={e => setPassword(e.target.value)} />
+                </Form.Field>
+                <Button type='submit'>Login</Button>
+            </Form>
+
         </div>
     );
 }
