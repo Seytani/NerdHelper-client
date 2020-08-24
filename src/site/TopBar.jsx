@@ -1,18 +1,20 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Menu, Button, Dropdown } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlasses } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 let TopBar = (props) => {
     const glassesIcon = <FontAwesomeIcon icon={faGlasses} />
     const [activeItem, setActiveItem] = useState('');
 
-    let handleItemClick = (e, { name }) => setActiveItem(name);
-    let activeSession = (active) => {
-        if (active) {
+    let handleItemClick = ({ name }) => setActiveItem(name);
+
+
+    let activeSession = () => {
+        if (props.isLoggedIn) {
             return (
                 <Menu.Menu position='right'>
-
                     <Menu.Item>
                         <Button inverted color='brown' onClick={props.logout}>Logout</Button>
                     </Menu.Item>
@@ -31,8 +33,9 @@ let TopBar = (props) => {
                 active={activeItem === 'topics'}
                 onClick={handleItemClick}
             >
-                Topics
+                <Link to='/topics'>Topics</Link>
         </Menu.Item>
+        
 
             <Dropdown item text='Change Study Mode'>
                 <Dropdown.Menu>
@@ -42,7 +45,7 @@ let TopBar = (props) => {
                 </Dropdown.Menu>
             </Dropdown>
 
-            {activeSession(props.isLoggedIn)}
+            {activeSession()}
         </Menu>
     )
 }

@@ -13,11 +13,10 @@ const TopicCreate = (props) => {
             body: JSON.stringify({ name: topicName }),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': props.token
+                'Authorization': localStorage.getItem('token')
             })
         })
             .then(res => res.json()).then(data => { setTopicName(data); console.log(data); props.fetchTopics() })
-        // inputRef.current.reset();
     }
 
     return (

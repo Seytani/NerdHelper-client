@@ -13,7 +13,7 @@ const SignUp = (props) => {
         body: JSON.stringify({name: name, email: email, password: password}),
         headers: new Headers({ 'Content-Type': 'application/json'}),
     })
-    .then(res => res.json()).then(data => props.updateToken(data.sessionToken))
+    .then(res => res.json()).then(data => { localStorage.setItem('token', data.sessionToken); props.toHome() })
     }
 
     return (

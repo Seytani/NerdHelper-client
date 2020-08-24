@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button, Modal, Input } from 'semantic-ui-react'
 
 
-//needs updtae, first work on server
 const TopicUpdate = (props) => {
     const [open, setOpen] = useState(false);
     const [dimmer, setDimmer] = useState('');
