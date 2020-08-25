@@ -1,5 +1,7 @@
 import React, { useState, createRef } from 'react'
 import { Input, Button, Icon } from 'semantic-ui-react';
+import APIURL from '../helpers/environment';
+
 
 const TopicCreate = (props) => {
     const [topicName, setTopicName] = useState('');
@@ -8,7 +10,7 @@ const TopicCreate = (props) => {
     let handleClick = () => inputRef.current.focus();
     let handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3001/topics/add-topic', {
+        fetch(`${APIURL}/topics/add-topic`, {
             method: 'POST',
             body: JSON.stringify({ name: topicName }),
             headers: new Headers({

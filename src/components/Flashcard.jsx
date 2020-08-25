@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Reveal, Card } from 'semantic-ui-react'
 import { useLocation, useHistory } from 'react-router-dom';
+import APIURL from '../helpers/environment';
 
 
 const Flashcard = (props) => {
@@ -15,7 +16,7 @@ const Flashcard = (props) => {
     }, [])
 
     const fetchQuestions = () => {
-        fetch(`http://localhost:3001/topics/view-topic/${location.topic.id}`, {
+        fetch(`${APIURL}/topics/view-topic/${location.topic.id}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',

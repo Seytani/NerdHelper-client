@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form } from 'semantic-ui-react';
+import APIURL from '../helpers/environment';
 
 const SignUp = (props) => {
     const [name, setName] = useState('');
@@ -8,7 +9,7 @@ const SignUp = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3001/user/add-user', {
+        fetch(`${APIURL}/user/add-user`, {
         method: 'POST', 
         body: JSON.stringify({name: name, email: email, password: password}),
         headers: new Headers({ 'Content-Type': 'application/json'}),

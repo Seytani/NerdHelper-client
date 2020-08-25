@@ -5,6 +5,7 @@ import TopicCard from '../components/TopicCard';
 import TopicCreate from '../components/TopicCreate';
 import ManageQuestions from '../components/ManageQuestions';
 import Flashcard from '../components/Flashcard';
+import APIURL from '../helpers/environment';
 
 export default class Topics extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ export default class Topics extends Component {
     }
 
     fetchTopics() {
-        fetch('http://localhost:3001/topics/view-all', {
+        fetch(`${APIURL}/topics/view-all`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',

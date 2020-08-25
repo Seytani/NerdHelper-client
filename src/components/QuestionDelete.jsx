@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
+import APIURL from '../helpers/environment';
+
 
 const QuestionDelete = (props) => {
     const [open, setOpen] = useState(false);
 
     let handleSubmit = () => {
         setOpen(false);
-        fetch(`http://localhost:3001/question/delete/${props.questionId}`, {
+        fetch(`${APIURL}/question/delete/${props.questionId}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

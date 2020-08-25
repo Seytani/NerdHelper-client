@@ -3,3 +3,10 @@ heroku create nerdpal-client --buildpack https://github.com/mars/create-react-ap
 
 git add . 
 git commit -m "some message"
+
+npm run build
+
+npm run build
+git add . 
+git commit -m "first commit"
+git push heroku master

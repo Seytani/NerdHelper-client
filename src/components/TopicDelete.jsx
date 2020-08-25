@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
+import APIURL from '../helpers/environment';
 
 const TopicDelete = (props) => {
     const [open, setOpen] = useState(false);
@@ -7,7 +8,7 @@ const TopicDelete = (props) => {
     let handleSubmit = () => {
         setOpen(false);
         let topicId = props.topic.id;
-        fetch(`http://localhost:3001/topics/delete/${topicId}`, {
+        fetch(`${APIURL}/topics/delete/${topicId}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

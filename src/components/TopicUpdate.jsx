@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, Input } from 'semantic-ui-react'
-
+import APIURL from '../helpers/environment';
 
 const TopicUpdate = (props) => {
     const [open, setOpen] = useState(false);
@@ -10,7 +10,7 @@ const TopicUpdate = (props) => {
     let handleSubmit = () => {
         setOpen(false);
         let topicId = props.topic.id;
-        fetch(`http://localhost:3001/topics/edit/${topicId}`, {
+        fetch(`${APIURL}/topics/edit/${topicId}`, {
             method: 'PUT',
             body: JSON.stringify({ name: newTopicName }),
             headers: new Headers({

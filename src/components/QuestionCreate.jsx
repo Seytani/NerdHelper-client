@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, Input, Form } from 'semantic-ui-react'
+import APIURL from '../helpers/environment';
 
 
 const QuestionCreate = (props) => {
@@ -13,7 +14,7 @@ const QuestionCreate = (props) => {
 
     let handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3001/question/add', {
+        fetch(`${APIURL}/question/add`, {
             method: 'POST',
             body: JSON.stringify({
                 topic_id: props.topic.id,

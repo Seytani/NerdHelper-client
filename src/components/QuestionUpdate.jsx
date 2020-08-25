@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, Input, Form } from 'semantic-ui-react'
+import APIURL from '../helpers/environment';
 
 
 const QuestionUpdate = (props) => {
@@ -15,7 +16,7 @@ const QuestionUpdate = (props) => {
 
     let handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3001/question/edit/${props.question.id}`, {
+        fetch(`${APIURL}/question/edit/${props.question.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 question: newQuestion,

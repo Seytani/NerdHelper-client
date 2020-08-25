@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button, Card } from 'semantic-ui-react';
 import QuestionCard from './QuestionCard';
 import QuestionCreate from './QuestionCreate';
+import APIURL from '../helpers/environment';
+
 
 class ManageQuestions extends Component {
     constructor(props) {
@@ -20,7 +22,7 @@ class ManageQuestions extends Component {
     }
 
     fetchQuestions() {
-        fetch(`http://localhost:3001/topics/view-topic/${this.props.location.topic.id}`, {
+        fetch(`${APIURL}/topics/view-topic/${this.props.location.topic.id}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
