@@ -4,6 +4,7 @@ import { Grid } from 'semantic-ui-react';
 import TopicCard from '../components/TopicCard';
 import TopicCreate from '../components/TopicCreate';
 import ManageQuestions from '../components/ManageQuestions';
+import Flashcard from '../components/Flashcard';
 
 export default class Topics extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ export default class Topics extends Component {
         }
         this.fetchTopics = this.fetchTopics.bind(this);
         this.toQuestion = this.toQuestion.bind(this);
+        this.toFlashcards = this.toFlashcards.bind(this);
         this.pullColumn = this.pullColumn.bind(this);
     }
 
@@ -38,11 +40,19 @@ export default class Topics extends Component {
             topic: currentTopic
         });
     }
+    
+    toFlashcards(id) {
+        let currentTopic = this.state.topics[this.state.topics.findIndex(element => element.id === id)];
+        this.props.history.push({
+            pathname: `${this.props.match.path}/${id}/flashcards`,
+            topic: currentTopic
+        });
+    }
 
     pullColumn(topic) {
         return (
             <Grid.Column>
-                <TopicCard topic={topic} fetchTopics={this.fetchTopics} toQuestion={this.toQuestion} />
+                <TopicCard topic={topic} fetchTopics={this.fetchTopics} toQuestion={this.toQuestion} toFlashcards={this.toFlashcards}/>
             </Grid.Column>
         )
     }
@@ -61,6 +71,7 @@ export default class Topics extends Component {
                         </Grid>
                     </Route>
                     <Route path={`${this.props.match.path}/:topicId/questions`} component={ManageQuestions} />
+                    <Route path={`${this.props.match.path}/:topicId/flashcards`} component={Flashcard} />
                 </Switch>
             </div>
         )

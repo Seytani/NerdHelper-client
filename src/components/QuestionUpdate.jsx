@@ -5,9 +5,11 @@ import { Button, Modal, Input, Form } from 'semantic-ui-react'
 const QuestionUpdate = (props) => {
     const [open, setOpen] = useState(false);
     const [dimmer, setDimmer] = useState('');
-    const [newQuestion, setNewQuestion] = useState('');
-    const [newCorrectAnswer, setNewCorrectAnswer] = useState('');
-    const [newIncorrectAnswers, setNewIncorrectAnswers] = useState({1: '', 2: '', 3: ''});
+    const [newQuestion, setNewQuestion] = useState(props.question.question);
+    const [newCorrectAnswer, setNewCorrectAnswer] = useState(props.question.correctAnswer);
+    const [newIncorrectAnswer_1, setNewIncorrectAnswer_1] = useState(props.question.incorrectAnswer_1);
+    const [newIncorrectAnswer_2, setNewIncorrectAnswer_2] = useState(props.question.incorrectAnswer_2);
+    const [newIncorrectAnswer_3, setNewIncorrectAnswer_3] = useState(props.question.incorrectAnswer_3);
     const [inReview, setInReview] = useState(props.question.review);
 
 
@@ -18,7 +20,9 @@ const QuestionUpdate = (props) => {
             body: JSON.stringify({
                 question: newQuestion,
                 correctAnswer: newCorrectAnswer,
-                incorrectAnswers: newIncorrectAnswers,
+                incorrectAnswer_1: newIncorrectAnswer_1,
+                incorrectAnswer_2: newIncorrectAnswer_2,
+                incorrectAnswer_3: newIncorrectAnswer_3,
                 review: inReview
 
             }),
@@ -27,7 +31,7 @@ const QuestionUpdate = (props) => {
                 'Authorization': localStorage.getItem('token')
             })
         })
-            .then(res => res.json()).then(data => {setOpen(false); props.fetchQuestions();})
+            .then(res => res.json()).then(data => { setOpen(false); props.fetchQuestions(); })
     }
 
     return (
@@ -55,26 +59,29 @@ const QuestionUpdate = (props) => {
                         </Form.Field>
                         <Form.Field>
                             <label>Incorrect Answers (For Quiz Mode)</label>
-                            <Form.Group inline>
+                            <Form.Field >
                                 <label>1.</label>
-                            <Input focus fluid defaultValue={props.question.incorrectAnswers[1]} onChange={e => setNewIncorrectAnswers({...newIncorrectAnswers, 1: e.target.value})} placeholder='Enter Incorrect Answer 1' />
+                                <Input focus fluid defaultValue={newIncorrectAnswer_1} onChange={e => setNewIncorrectAnswer_1(e.target.value)} placeholder='Enter Incorrect Answer 1' />
+                            </Form.Field>
+                            <Form.Field >
                                 <label>2.</label>
-                            <Input focus fluid defaultValue={props.question.incorrectAnswers[2]} onChange={e => setNewIncorrectAnswers({...newIncorrectAnswers, 2: e.target.value})} placeholder='Enter Incorrect Answer 2' />
+                                <Input focus fluid defaultValue={props.question.incorrectAnswer_2} onChange={e => setNewIncorrectAnswer_2(e.target.value)} placeholder='Enter Incorrect Answer 2' />
+                            </Form.Field>
+                            <Form.Field >
                                 <label>3.</label>
-                            <Input focus fluid defaultValue={props.question.incorrectAnswers[3]} onChange={e => setNewIncorrectAnswers({...newIncorrectAnswers, 3: e.target.value})} placeholder='Enter Incorrect Answer 3' />
-                            </Form.Group>
-                            <Form.Checkbox label='In Review List' defaultChecked={props.question.review} onClick={e => {setInReview(!inReview);}} />
+                                <Input focus fluid defaultValue={props.question.incorrectAnswer_3} onChange={e => setNewIncorrectAnswer_3(e.target.value)} placeholder='Enter Incorrect Answer 3' />
+                            </Form.Field>
+                            <Form.Checkbox label='In Review List' defaultChecked={props.question.review} onClick={e => { setInReview(!inReview); }} />
                         </Form.Field>
                     </Form>
                 </Modal.Content>
                 <Modal.Actions>
-
                     <Button positive onClick={handleSubmit}>
                         Save
-            </Button>
+                    </Button>
                     <Button negative onClick={() => setOpen(false)}>
                         Cancel
-            </Button>
+                    </Button>
                 </Modal.Actions>
             </Modal>
         </div>

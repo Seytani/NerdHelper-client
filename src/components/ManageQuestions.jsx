@@ -13,7 +13,7 @@ class ManageQuestions extends Component {
         this.goBack = this.goBack.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         console.log(this.props.location)
         this.fetchQuestions();
         console.log('manage questions---', this.state.questions);

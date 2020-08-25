@@ -14,7 +14,9 @@ const QuestionCard = props => {
                     <h4>Answer</h4>
                     <p>{props.question.correctAnswer}</p>
                     <h4>Incorrect Answers (For Quiz Mode)</h4>
-                    <p>{JSON.stringify(props.question.incorrectAnswers)}</p>
+                    <p>{`1. ${props.question.incorrectAnswer_1}`}</p>
+                    <p>{`2. ${props.question.incorrectAnswer_2}`}</p>
+                    <p>{`3. ${props.question.incorrectAnswer_3}`}</p>
                 </Card.Description>
                 <QuestionUpdate question={props.question} fetchQuestions={props.fetchQuestions}/>
                 <QuestionDelete questionId={props.question.id} fetchQuestions={props.fetchQuestions}/>

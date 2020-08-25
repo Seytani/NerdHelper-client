@@ -37,3 +37,8 @@
     transform: rotate(360deg);
   }
 }
+
+.topicCardOptions {
+  position: relative;
+  top: 3em;
+}

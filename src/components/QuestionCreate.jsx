@@ -7,7 +7,9 @@ const QuestionCreate = (props) => {
     const [dimmer, setDimmer] = useState('');
     const [question, setQuestion] = useState('');
     const [correctAnswer, setCorrectAnswer] = useState('');
-    const [incorrectAnswers, setIncorrectAnswers] = useState({1: '', 2: '', 3: ''});
+    const [incorrectAnswer_1, setIncorrectAnswer_1] = useState('');
+    const [incorrectAnswer_2, setIncorrectAnswer_2] = useState('');
+    const [incorrectAnswer_3, setIncorrectAnswer_3] = useState('');
 
     let handleSubmit = (e) => {
         e.preventDefault();
@@ -17,14 +19,16 @@ const QuestionCreate = (props) => {
                 topic_id: props.topic.id,
                 question: question,
                 correctAnswer: correctAnswer,
-                incorrectAnswers: incorrectAnswers
+                incorrectAnswer_1: incorrectAnswer_1,
+                incorrectAnswer_2: incorrectAnswer_2,
+                incorrectAnswer_3: incorrectAnswer_3,
             }),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
             })
         })
-            .then(res => res.json()).then(data => {setOpen(false); props.fetchQuestions();})
+            .then(res => res.json()).then(data => { setOpen(false); props.fetchQuestions(); })
     }
 
     return (
@@ -52,14 +56,19 @@ const QuestionCreate = (props) => {
                         </Form.Field>
                         <Form.Field>
                             <label>Incorrect Answers (For Quiz Mode)</label>
-                            <Form.Group inline>
+                            <Form.Field>
                                 <label>1.</label>
-                            <Input focus fluid onChange={e => setIncorrectAnswers({...incorrectAnswers, 1: e.target.value})} placeholder='Enter Incorrect Answer 1' />
+                            <Input focus fluid onChange={e => setIncorrectAnswer_1(e.target.value)} placeholder='Enter Incorrect Answer 1' />
+                            </Form.Field>
+                            <Form.Field>
                                 <label>2.</label>
-                            <Input focus fluid onChange={e => setIncorrectAnswers({...incorrectAnswers, 2: e.target.value})} placeholder='Enter Incorrect Answer 2' />
+                            <Input focus fluid onChange={e => setIncorrectAnswer_2(e.target.value)} placeholder='Enter Incorrect Answer 2' />
+                            </Form.Field>
+                            <Form.Field>
+
                                 <label>3.</label>
-                            <Input focus fluid onChange={e => setIncorrectAnswers({...incorrectAnswers, 3: e.target.value})} placeholder='Enter Incorrect Answer 3' />
-                            </Form.Group>
+                            <Input focus fluid onChange={e => setIncorrectAnswer_3(e.target.value)} placeholder='Enter Incorrect Answer 3' />
+                            </Form.Field>
                         </Form.Field>
                     </Form>
                 </Modal.Content>
