@@ -10,34 +10,38 @@ const SignUp = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         fetch(`${APIURL}/user/add-user`, {
-        method: 'POST', 
-        body: JSON.stringify({name: name, email: email, password: password}),
-        headers: new Headers({ 'Content-Type': 'application/json'}),
-    })
-    .then(res => res.json()).then(data => { localStorage.setItem('token', data.sessionToken); props.toHome() })
+            method: 'POST',
+            body: JSON.stringify({ name: name, email: email, password: password }),
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+        })
+            .then(res => res.json()).then(data => { localStorage.setItem('token', data.sessionToken); props.toHome() })
     }
 
     return (
-        <div style={{padding: '2em'}}>
-        <h1> Sign Up</h1> <br/>
-        <Form onSubmit={handleSubmit}>
-            <Form.Field required>
-                <label for="name">Name</label>
-                <Form.Input type="text" name="name" id="name" placeholder="Enter name" 
-                width={6} onChange={e => setName(e.target.value)} required/>
-            </Form.Field>
-            <Form.Field required>
-                <label for="email">Email</label>
-                <Form.Input type="email" name="email" id="email" placeholder="Enter you email address" 
-                width={6} onChange={e => setEmail(e.target.value)}/>
-            </Form.Field>
-            <Form.Field required>
-                <label for="password">Password</label>
-                <Form.Input type="password" name="password" id="password" placeholder="Enter Password" 
-                width={6} minLength="6" onChange={e => setPassword(e.target.value)}/>
-            </Form.Field>
-            <Form.Button type='submit'>Sign Up</Form.Button>
-        </Form>
+        <div className='authForms'>
+            <h1 className='authHeader'> Sign Up</h1>
+            <Form size={'big'} onSubmit={handleSubmit}>
+                <Form.Field required>
+                    <label for="name">Name</label>
+                    <Form.Input type="text" name="name" id="name" placeholder="Enter name"
+                        onChange={e => setName(e.target.value)} required />
+                </Form.Field>
+                <Form.Field required>
+                    <label for="email">Email</label>
+                    <Form.Input type="email" name="email" id="email" placeholder="Enter you email address"
+                        onChange={e => setEmail(e.target.value)} />
+                </Form.Field>
+                <Form.Field required>
+                    <label for="password">Password</label>
+                    <Form.Input type="password" name="password" id="password" placeholder="Enter Password"
+                        minLength="6" onChange={e => setPassword(e.target.value)} />
+                </Form.Field>
+                <button type='submit' className='authButton'>Sign Up</button>
+            </Form>
+            <div className='authToggle'>
+                <p className='authToggleText'>Already have an account?</p>
+                <button className='authToggleButton' onClick={props.toggleAuth}>Log In</button>
+            </div>
         </div>
     );
 }

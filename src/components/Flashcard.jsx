@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Reveal, Card } from 'semantic-ui-react'
+import { Reveal, Button, Grid } from 'semantic-ui-react'
 import { useLocation, useHistory } from 'react-router-dom';
 import APIURL from '../helpers/environment';
 
@@ -9,10 +9,9 @@ const Flashcard = (props) => {
     const location = useLocation();
     const history = useHistory();
 
-    useEffect( () => {
+    useEffect(() => {
         console.log('FROM FLASHCARD', location.topic.id)
         fetchQuestions();
-        scramble(questions);
     }, [])
 
     const fetchQuestions = () => {
@@ -23,10 +22,10 @@ const Flashcard = (props) => {
                 'Authorization': localStorage.getItem('token')
             })
         })
-            .then(res => res.json()).then(data => { setQuestions(data.questions) })
+            .then(res => res.json()).then(data => { scramble(data.questions) })
     }
 
-    const goBack = () =>  {
+    const goBack = () => {
         history.goBack();
     }
 
@@ -38,34 +37,48 @@ const Flashcard = (props) => {
             } while (indexes.includes(randomIndex));
             indexes.push(randomIndex);
         } while (indexes.length < max);
+
         return indexes;
     }
-    
-    let scramble = questions => {
-        let indexes = generateIndexes(questions.length)
+
+    let scramble = q => {
+        let indexes = generateIndexes(q.length)
         let temp = [];
-        for(let index of indexes) {
-            temp.push(questions[index]);
+        for (let index of indexes) {
+            temp.push(q[index]);
         }
         setQuestions(temp);
     }
 
     return (
-        <div style={{textAlign:'center'}}>
-        {questions.map(element => ( //does not work, out of scope
-            <Card>
-            <h1>location.topic.name</h1>
+        <div>
+            <Button basic className='backButton' color='yellow' onClick={goBack}>Go Back </Button>
+        <div style={{ textAlign: 'center' }}>
+            <h1>{location.topic.name}</h1>
             <h3>Hover to see the answer</h3>
-        <Reveal animated='move right'>
-            <Reveal.Content visible>
-                <p>element.question</p>
-            </Reveal.Content>
-            <Reveal.Content hidden>
-                <p>element.correctAnswer</p>
-            </Reveal.Content>
-        </Reveal>
-        </Card>
-    ))}
+            <Grid centered columns={2}>
+                {questions.map((question) =>
+                    <Grid.Row>
+                        <Grid.Column>
+                            <div>
+                                <Reveal animated='move right'>
+                                    <Reveal.Content visible>
+                                        <div className='flashcard'>
+                                            <h3>{question.question}</h3>
+                                        </div>
+                                    </Reveal.Content>
+                                    <Reveal.Content hidden>
+                                        <div className='flashcard'>
+                                            <h3>Answer</h3>
+                                        </div>
+                                    </Reveal.Content>
+                                </Reveal>
+                            </div>
+                        </Grid.Column>
+                    </Grid.Row>
+                )}
+            </Grid>
+        </div>
         </div>
     );
 }

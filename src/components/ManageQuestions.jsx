@@ -16,7 +16,6 @@ class ManageQuestions extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props.location)
         this.fetchQuestions();
         console.log('manage questions---', this.state.questions);
     }
@@ -40,7 +39,7 @@ class ManageQuestions extends Component {
     render() {
         return (
             <div>
-                <Button basic color='yellow' onClick={this.goBack}>Go Back </Button>
+                <Button basic className='backButton' color='yellow' onClick={this.goBack}>Go Back </Button>
                 {/* <Button basic color='yellow' onClick={this.fetchQuestions}>Fetch Questions </Button> */}
                 <QuestionCreate topic={this.props.location.topic} fetchQuestions={this.fetchQuestions}/>
             {this.state.questions[0] != undefined ? 
