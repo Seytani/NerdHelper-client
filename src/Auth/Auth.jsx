@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SignUp from './SignUp';
 import Login from './Login';
-import { Grid, Image } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 
 class Auth extends Component {
 constructor(props) {
@@ -33,8 +33,8 @@ render() {
             <div id='brand'></div>
             <div id='landingText'>
             <h1 className='landingHeader'>Hey there,</h1>
-            <h1 className='landingHeader'>Ready to </h1>
-            <h1 className='landingHeader'>Nerd out?</h1>
+            <h1 className='landingHeader'>ready to </h1>
+            <h1 className='landingHeader'>nerd out?</h1>
             <h3 className='landingSub'>Sign Up or Login to start studying</h3>
             </div>
         </div>

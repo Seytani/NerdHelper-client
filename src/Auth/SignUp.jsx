@@ -23,17 +23,17 @@ const SignUp = (props) => {
             <Form size={'big'} onSubmit={handleSubmit}>
                 <Form.Field required>
                     <label for="name">Name</label>
-                    <Form.Input type="text" name="name" id="name" placeholder="Enter name"
-                        onChange={e => setName(e.target.value)} required />
+                    <Form.Input required type="text" name="name" id="name" placeholder="Enter name"
+                        onChange={e => setName(e.target.value)} />
                 </Form.Field>
                 <Form.Field required>
                     <label for="email">Email</label>
-                    <Form.Input type="email" name="email" id="email" placeholder="Enter you email address"
+                    <Form.Input required type="email" name="email" id="email" placeholder="Enter you email address"
                         onChange={e => setEmail(e.target.value)} />
                 </Form.Field>
                 <Form.Field required>
                     <label for="password">Password</label>
-                    <Form.Input type="password" name="password" id="password" placeholder="Enter Password"
+                    <Form.Input required type="password" name="password" id="password" placeholder="Enter Password"
                         minLength="6" onChange={e => setPassword(e.target.value)} />
                 </Form.Field>
                 <button type='submit' className='authButton'>Sign Up</button>

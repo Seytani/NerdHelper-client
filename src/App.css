@@ -3,23 +3,14 @@ body {
   padding: 0px;
   background-color: rgb(245, 245, 245);
 }
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* LANDING/AUTH */
 
 #brand {
   margin: 2em;
   background-image: url(./assets/nerdpal_brand_white\ 2.png);
- width: 14em;
- height: 6.5em;
- margin-bottom: 6em;
+  width: 14em;
+  height: 6.5em;
+  margin-bottom: 6em;
 }
 
 .landingHeader {
@@ -33,14 +24,12 @@ body {
   color: white;
 }
 
-
 .authLanding {
   width: 95%;
   height: 70em;
   margin: 4em;
   border-radius: 30px;
   box-shadow: 10px 5px 5px #E0E1E2;
-
 }
 
 .authImage {
@@ -49,11 +38,9 @@ body {
   margin-top: 4em;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
-
   /* background-image: url(./assets/nerdpal_landing3.png); */
   background: linear-gradient(#29335C, #db2b39, #f3a712);
 }
-
 
 .authForms {
   position: relative;
@@ -61,13 +48,13 @@ body {
   top: 5em;
   width: 100%;
   margin: 4em;
-
 }
 
 .authHeader {
   margin-bottom: 3em;
   color: #29335C;
 }
+
 .authButton {
   width: 80%;
   height: 2.5em;
@@ -87,15 +74,225 @@ body {
   border: none;
 }
 
+/* TOPICS */
 
-.flashcard {
-  display:flex;
-  justify-content: center; 
+#topBarBrand {
+  background-image: url('./assets/nerdpal_brand_white\ 2.png');
+  background-size: 80%;
+  background-repeat: no-repeat;
+  width: 4em;
+  height: 1.4em;
+}
+
+#topicsCreate {
+  margin-top: 4em;
+  text-align: center;
+}
+
+.header {
+  font-size: 3em;
+  color: #29335C;
+}
+
+/* TOPIC CARD */
+
+.topicCard {
+  width: 100%;
+  height: 80%;
+  margin: 2em;
+  padding: 1em;
+  border-radius: 20px;
+  box-shadow: 1px 4px 10px #E0E1E2;
+  background-color: #eee6c2;
+}
+
+.topicCardHeader {
+  text-align: center;
+  font-size: 2em;
+  padding-top: 2em;
+}
+
+.topicCardHeaderButtons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.update {
+  padding: 0.4em;
+  padding-left: 1em;
+  color: white;
+  background: black;
+  border: none;
+  border-left: 1px white solid;
+  border-top: 1px white solid;
+  border-bottom: 1px white solid;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.delete {
+  padding: 0.4em;
+  padding-right: 1em;
+  color: white;
+  background: black;
+  border: none;
+  border-right: 1px white solid;
+  border-top: 1px white solid;
+  border-bottom: 1px white solid;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.update:hover {
+  background: #334172;
+  cursor: pointer;
+}
+
+.delete:hover {
+  background: #cc2331;
+  cursor: pointer;
+}
+
+.topicCardQuestionButtons {
+  display: flex;
+  justify-content: center;
+}
+
+.divider {
+  color: gainsboro;
+  width: 90%;
+}
+
+.topicCardButton {
+  background: none;
+  padding: 1em;
+  margin: 0.5em;
+  border-radius: 15px;
+  border: none;
+  margin-bottom: 4em;
+  margin-top: 2em;
+  color: white
+}
+
+.topicCardButton:hover {
+  cursor: pointer;
+}
+
+.one {
+  background-image: linear-gradient(#29335C, #324077);
+}
+
+.two {
+  background-image: linear-gradient(#a01d28, #db2b39);
+}
+
+.three {
+  background-image: linear-gradient(#f38338, #f3a712);
+}
+
+.one:hover {
+  background-image: linear-gradient(#435497, #5c74d4);
+}
+
+.two:hover {
+  background-image: linear-gradient(#c72734, #fa4a58);
+}
+
+.three:hover {
+  background-image: linear-gradient(#ffc14e, #fdc453);
+}
+
+.topicCardManageButton {
+  display: flex;
+  justify-content: flex-end;
+  padding: ;
+}
+
+/* MANAGE QUESTIONS */
+
+#manageQuestions {
+  padding-top: 3em;
+  width: 50%;
+  margin: auto;
+}
+
+.manageQuestionsButtons {
+  margin: 2em;
+  display: flex;
+}
+
+.backButton {
+  padding: 10em;
+}
+
+/* QUESTIONS */
+
+.question {
+  font-size: 0.6em;
+  padding-bottom: 1em;
+}
+
+.questionControls {
+  display: flex;
+}
+
+/* FLASHCARD */
+
+#flashcardBackButton {
+  display: block;
+}
+
+.flashcardComponent {
+  padding: 2em;
+  background: linear-gradient(#29335C, #db2b39, #f3a712);
+}
+
+.flashcardHeaders {
+  color: white;
+  margin-bottom: 5em;
+}
+
+.flashcardVisible {
+  margin-left: 1em;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  width: 70em;
-  height:30em;
+  width: 50em;
+  height: 30em;
+  background-color: #f5f3ec;
   border-radius: 10px;
-  border: 1px inset rgb(255, 255, 255);
-  background-color: beige;
-  
+  margin-bottom: 3em;
+  color: black;
+}
+
+.flashcardHidden {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50em;
+  height: 30em;
+  border-radius: 10px;
+  background-color: #025252;
+  margin-bottom: 3em;
+}
+
+.flashcardText {
+  padding: 2em;
+  font-size: 2em;
+  text-align: center;
+}
+
+.noFlashcards {
+  margin-top: 5em;
+  height: 70em;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

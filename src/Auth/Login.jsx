@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
 import APIURL from '../helpers/environment';
-import { Link, Redirect, useHistory } from 'react-router-dom';
 
 const Login = props => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    let history = useHistory();
     let handleSubmit = (e) => {
         e.preventDefault();
         fetch(`${APIURL}/user/login`, {
@@ -26,12 +24,12 @@ const Login = props => {
             <Form size={'big'} onSubmit={handleSubmit}>
                 <Form.Field required>
                     <label for="email">Email</label>
-                    <Form.Input type="email" name="email" id="email" placeholder="Enter you email address"
+                    <Form.Input required type="email" name="email" id="email" placeholder="Enter you email address"
                         onChange={e => setEmail(e.target.value)} />
                 </Form.Field>
-                <Form.Field>
+                <Form.Field required>
                     <label for="password">Password</label>
-                    <Form.Input type="password" name="password" id="password" placeholder="Enter Password"
+                    <Form.Input required type="password" name="password" id="password" placeholder="Enter Password"
                         minLength="6" onChange={e => setPassword(e.target.value)} />
                 </Form.Field>
                 <button type='submit' className='authButton'>Login</button>

@@ -34,7 +34,7 @@ const QuestionCreate = (props) => {
 
     return (
         <div>
-            <Button basic color='pink' onClick={() => { setOpen(true); setDimmer('blurring') }}>
+            <Button basic color='teal' onClick={() => { setOpen(true); setDimmer('blurring') }}>
                 Add Question
         </Button>
 

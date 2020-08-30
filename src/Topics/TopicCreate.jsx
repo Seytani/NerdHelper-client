@@ -5,10 +5,9 @@ import APIURL from '../helpers/environment';
 
 const TopicCreate = (props) => {
     const [topicName, setTopicName] = useState('');
-    let inputRef = createRef();
 
-    let handleClick = () => inputRef.current.focus();
     let handleSubmit = (e) => {
+        if(topicName === '') return;
         e.preventDefault();
         fetch(`${APIURL}/topics/add-topic`, {
             method: 'POST',
@@ -23,9 +22,8 @@ const TopicCreate = (props) => {
 
     return (
         <div>
-            <Button content='Add Topic' onClick={handleClick} />
-            <Input icon={<Icon name='plus' link onClick={handleSubmit} />}
-                onChange={e => setTopicName(e.target.value)} ref={inputRef} placeholder='Enter New Topic Name...' />
+            <Input action={{color: 'black', labelPosition: 'right', icon:'plus', content: 'Add Topic', onClick: handleSubmit}}  
+            size ={'big'} onChange={e => setTopicName(e.target.value)} placeholder='Enter New Topic...' />
         </div>
     );
 }

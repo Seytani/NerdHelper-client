@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
-import TopicCard from '../components/TopicCard';
-import TopicCreate from '../components/TopicCreate';
-import ManageQuestions from '../components/ManageQuestions';
-import Flashcard from '../components/Flashcard';
+import TopBar from '../site/TopBar';
+import TopicCard from '../Topics/TopicCard';
+import TopicCreate from '../Topics/TopicCreate';
+import ManageQuestions from '../Questions/ManageQuestions';
+import Flashcard from '../Views/Flashcard';
 import APIURL from '../helpers/environment';
 
 export default class Topics extends Component {
@@ -17,6 +18,7 @@ export default class Topics extends Component {
         this.toQuestion = this.toQuestion.bind(this);
         this.toFlashcards = this.toFlashcards.bind(this);
         this.pullColumn = this.pullColumn.bind(this);
+        this.toHome = this.toHome.bind(this);
     }
 
     componentWillMount() {
@@ -41,6 +43,10 @@ export default class Topics extends Component {
             topic: currentTopic
         });
     }
+
+    toHome() {
+        this.props.history.replace({pathname: '/', state: null})
+    }
     
     toFlashcards(id) {
         let currentTopic = this.state.topics[this.state.topics.findIndex(element => element.id === id)];
@@ -61,13 +67,14 @@ export default class Topics extends Component {
     render() { 
         return (
             <div>
+                    <TopBar toHome={this.toHome}/>
                 <Switch>
                     <Route exact path={this.props.match.path}>
-                        <div style={{ textAlign: 'center' }}>
-                            <h1>Study Topics</h1>
+                        <div id='topicsCreate'>
+                            <h1 className='header'>Study Topics</h1>
                             <TopicCreate token={this.props.token} fetchTopics={this.fetchTopics} />
                         </div>
-                        <Grid columns={4}>
+                        <Grid columns={4} style={{marginRight: '3em'}}>
                             <Grid.Row>  {this.state.topics.map(topic => this.pullColumn(topic))}</Grid.Row>
                         </Grid>
                     </Route>

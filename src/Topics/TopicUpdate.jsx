@@ -4,7 +4,6 @@ import APIURL from '../helpers/environment';
 
 const TopicUpdate = (props) => {
     const [open, setOpen] = useState(false);
-    const [dimmer, setDimmer] = useState('');
     const [newTopicName, setNewTopicName] = useState('');
 
     let handleSubmit = () => {
@@ -23,13 +22,13 @@ const TopicUpdate = (props) => {
 
     return (
         <div>
-            <Button basic color='pink' onClick={() => { setOpen(true); setDimmer('blurring') }}>
+            <button className='topicCardManageButtons update' onClick={() => { setOpen(true);}}>
                 Rename
-        </Button>
+        </button>
 
             <Modal
                 size='mini'
-                dimmer={dimmer}
+                dimmer='blurring'
                 open={open}
                 onClose={() => setOpen(false)}
             >
