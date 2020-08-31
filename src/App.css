@@ -98,7 +98,7 @@ body {
 
 .topicCard {
   width: 100%;
-  height: 80%;
+  height: 90%;
   margin: 2em;
   padding: 1em;
   border-radius: 20px;
@@ -170,7 +170,7 @@ body {
   margin: 0.5em;
   border-radius: 15px;
   border: none;
-  margin-bottom: 4em;
+  margin-bottom: 2em;
   margin-top: 2em;
   color: white
 }
@@ -179,28 +179,36 @@ body {
   cursor: pointer;
 }
 
-.one {
+.manage {
   background-image: linear-gradient(#29335C, #324077);
 }
 
-.two {
+.flash {
   background-image: linear-gradient(#a01d28, #db2b39);
 }
 
-.three {
+.quiz {
   background-image: linear-gradient(#f38338, #f3a712);
 }
-
-.one:hover {
+.study {
+  display: flex;
+margin: auto;
+  justify-content: center;
+  padding: 2em;
+  background: #039b9b;
+}
+.manage:hover {
   background-image: linear-gradient(#435497, #5c74d4);
 }
 
-.two:hover {
+.flash:hover {
   background-image: linear-gradient(#c72734, #fa4a58);
 }
-
-.three:hover {
+.quiz:hover {
   background-image: linear-gradient(#ffc14e, #fdc453);
+}
+.study:hover {
+  background: #087575;
 }
 
 .topicCardManageButton {
@@ -234,12 +242,19 @@ body {
 }
 
 .questionControls {
+  margin-top: 1em;
   display: flex;
+  justify-content: end;
+}
+
+.questionCardDescription {
+  display: flex;
+  /* background: red; */
 }
 
 /* FLASHCARD */
 
-#flashcardBackButton {
+.compBackButton {
   display: block;
 }
 
@@ -268,6 +283,7 @@ body {
 
 .flashcardHidden {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 50em;
@@ -286,6 +302,29 @@ body {
 .noFlashcards {
   margin-top: 5em;
   height: 70em;
+}
+
+/* STUDY */
+#study {
+  width: 60em;
+  margin: auto;
+}
+
+.studyQuestions {
+  margin-top: 3em;
+  padding: 1em;
+  text-align: start;
+}
+.studyQuestionDiv {
+  margin-bottom: 3em;
+}
+.studyQuestion {
+  color: #29335C;
+  font-size: 1.5em;
+}
+.studyAnswer {
+  margin-left: 0.8em;
+  font-size: 1.2em;
 }
 
 @keyframes App-logo-spin {

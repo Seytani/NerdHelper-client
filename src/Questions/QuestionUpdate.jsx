@@ -35,9 +35,18 @@ const QuestionUpdate = (props) => {
             .then(res => res.json()).then(data => { setOpen(false); props.fetchQuestions(); })
     }
 
+    let setDefaults = () => {
+        setNewQuestion(props.question.question);
+        setNewCorrectAnswer(props.question.correctAnswer);
+        setNewIncorrectAnswer_1(props.question.incorrectAnswer_1);
+        setNewIncorrectAnswer_2(props.question.incorrectAnswer_2);
+        setNewIncorrectAnswer_3(props.question.incorrectAnswer_3);
+        setInReview(props.question.review);
+    }
+
     return (
         <div>
-            <Button basic color='blue' onClick={() => { setOpen(true); setDimmer('blurring') }}>
+            <Button basic color='blue' onClick={() => { setOpen(true); setDimmer('blurring'); setDefaults()}}>
                 Edit Question
         </Button>
 
@@ -62,7 +71,7 @@ const QuestionUpdate = (props) => {
                             <label>Incorrect Answers (For Quiz Mode)</label>
                             <Form.Field >
                                 <label>1.</label>
-                                <Input focus fluid defaultValue={newIncorrectAnswer_1} onChange={e => setNewIncorrectAnswer_1(e.target.value)} placeholder='Enter Incorrect Answer 1' />
+                                <Input focus fluid defaultValue={props.question.incorrectAnswer_1} onChange={e => setNewIncorrectAnswer_1(e.target.value)} placeholder='Enter Incorrect Answer 1' />
                             </Form.Field>
                             <Form.Field >
                                 <label>2.</label>

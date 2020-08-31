@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-import { Menu, Button, Image } from 'semantic-ui-react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGlasses } from '@fortawesome/free-solid-svg-icons';
+import React from 'react'
+import { Menu, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 let TopBar = (props) => {

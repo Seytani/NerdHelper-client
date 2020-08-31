@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import QuestionCard from '../Questions/QuestionCard';
 import QuestionCreate from './QuestionCreate';
 import APIURL from '../helpers/environment';
@@ -44,10 +44,10 @@ class ManageQuestions extends Component {
                     <Button basic className='backButton' color='yellow' onClick={this.goBack}>Go Back </Button>
                     <QuestionCreate topic={this.props.location.topic} fetchQuestions={this.fetchQuestions} />
                 </div>
-                {this.state.questions[0] != undefined ?
+                {this.state.questions[0] !== undefined ?
                     this.state.questions.map(question => <QuestionCard question={question} topic={this.props.location.topic} fetchQuestions={this.fetchQuestions} />)
                     : <h3>Questions added will display here</h3>}
-                    {this.state.questions[0] != undefined ? <div className='manageQuestionsButtons'>
+                    {this.state.questions[0] !== undefined ? <div className='manageQuestionsButtons'>
                     <Button basic className='backButton' color='yellow'  onClick={this.goBack}>Go Back </Button>
                     {/* <Button basic color='yellow' onClick={this.fetchQuestions}>Fetch Questions </Button> */}
                     <QuestionCreate topic={this.props.location.topic} fetchQuestions={this.fetchQuestions} />

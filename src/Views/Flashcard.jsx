@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Reveal, Button, Grid } from 'semantic-ui-react'
+import { Reveal, Button, Grid, Checkbox } from 'semantic-ui-react'
 import { useLocation, useHistory } from 'react-router-dom';
 import APIURL from '../helpers/environment';
 
 const Flashcard = (props) => {
     const [questions, setQuestions] = useState([]);
+    const [review, setReview] = useState(false);
     const location = useLocation();
     const history = useHistory();
 
@@ -22,6 +23,20 @@ const Flashcard = (props) => {
             })
         })
             .then(res => res.json()).then(data => { scramble(data.questions) })
+    }
+
+    const toggleInReview = (question) => {
+        fetch(`${APIURL}/question/edit/${question.id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                review: review
+            }),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            })
+        })
+            .then(res => res.json()).then(data => {  })
     }
 
     const goBack = () => {
@@ -53,9 +68,9 @@ const Flashcard = (props) => {
                 <div className='flashcardComponent'>
                     <Grid centered>
                             <div>
-                            <Button basic id='flashcardBackButton' color='yellow' onClick={goBack}>Go Back </Button>
+                            <Button basic className='compBackButton' color='yellow' onClick={goBack}>Go Back </Button>
                             </div>
-                            {questions[0] != undefined ?
+                            {questions[0] !== undefined ?
                             <div className='flashcardHeaders'>
                                 <h1>Topic: {location.topic.name}</h1>
                                 <h3>Hover to see the answer</h3>
@@ -72,6 +87,10 @@ const Flashcard = (props) => {
                                                     <Reveal.Content hidden>
                                                         <div className='flashcardHidden'>
                                                             <h3 className='flashcardText'>{question.correctAnswer}</h3>
+                                                            <div>
+                                                                <p>In review:</p>
+                                                                <Checkbox slider defaultChecked={question.review} onClick={() => {setReview(!question.review); toggleInReview(question)}}/>
+                                                            </div>
                                                         </div>
                                                     </Reveal.Content>
                                                 </Reveal>

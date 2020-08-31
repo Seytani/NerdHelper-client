@@ -7,6 +7,7 @@ import TopicCreate from '../Topics/TopicCreate';
 import ManageQuestions from '../Questions/ManageQuestions';
 import Flashcard from '../Views/Flashcard';
 import APIURL from '../helpers/environment';
+import Study from '../Views/Study';
 
 export default class Topics extends Component {
     constructor(props) {
@@ -15,10 +16,11 @@ export default class Topics extends Component {
             topics: [],
         }
         this.fetchTopics = this.fetchTopics.bind(this);
+        this.toHome = this.toHome.bind(this);
         this.toQuestion = this.toQuestion.bind(this);
         this.toFlashcards = this.toFlashcards.bind(this);
+        this.toStudy = this.toStudy.bind(this);
         this.pullColumn = this.pullColumn.bind(this);
-        this.toHome = this.toHome.bind(this);
     }
 
     componentWillMount() {
@@ -56,10 +58,18 @@ export default class Topics extends Component {
         });
     }
 
+    toStudy(id) {
+        let currentTopic = this.state.topics[this.state.topics.findIndex(element => element.id === id)];
+        this.props.history.push({
+            pathname: `${this.props.match.path}/${id}/study`,
+            topic: currentTopic
+        });
+    }
+
     pullColumn(topic) {
         return (
             <Grid.Column>
-                <TopicCard topic={topic} fetchTopics={this.fetchTopics} toQuestion={this.toQuestion} toFlashcards={this.toFlashcards}/>
+                <TopicCard topic={topic} fetchTopics={this.fetchTopics} toQuestion={this.toQuestion} toFlashcards={this.toFlashcards} toStudy={this.toStudy}/>
             </Grid.Column>
         )
     }
@@ -80,6 +90,7 @@ export default class Topics extends Component {
                     </Route>
                     <Route path={`${this.props.match.path}/:topicId/questions`} component={ManageQuestions} />
                     <Route path={`${this.props.match.path}/:topicId/flashcards`} component={Flashcard} />
+                    <Route path={`${this.props.match.path}/:topicId/study`} component={Study} />
                 </Switch>
             </div>
         )
