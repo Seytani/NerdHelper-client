@@ -10,12 +10,14 @@ const TopicCard = (props) => {
 
     let flashcardsClick = () => {
         props.toFlashcards(props.topic.id);
-
     }
 
     let studyClick = () => {
         props.toStudy(props.topic.id);
+    }
 
+    let quizClick = () => {
+        props.toQuiz(props.topic.id);
     }
 
     return (
@@ -30,7 +32,7 @@ const TopicCard = (props) => {
                 {/* <Link to='/questions'><Button>This</Button></Link> */}
                 <button className='topicCardButton manage' onClick={manageQuestionsClick}>Manage Questions</button>
                 <button className='topicCardButton flash' onClick={flashcardsClick}>Flashcards</button>
-                <button className='topicCardButton quiz' onClick={flashcardsClick}>Flashcards</button>
+                <button className='topicCardButton quiz' onClick={quizClick}>Quiz</button>
             </div>
                 <button className='topicCardButton study' onClick={studyClick}>Study</button>
 

@@ -4,21 +4,23 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { Grid, Menu, Button, Checkbox } from 'semantic-ui-react';
 
 const Study = (props) => {
-    const [review, setReview] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [showReview, setShowReview] = useState(false);
     const [activeItem, setActiveItem] = useState('all');
     const location = useLocation();
     const history = useHistory();
 
-
     useEffect(() => {
         console.log('FROM STUDY', location.topic.id)
         fetchQuestions();
     }, [])
 
-    let handleItemClick = (e, { name }) => { setActiveItem(name); name === 'review' ? setShowReview(true) : setShowReview(false); };
+    let handleItemClick = (e, { name }) => { setActiveItem(name); name === 'review' ? setShowReview(true) : setShowReview(false)};
 
+    const goBack = () => {
+        history.goBack();
+    }
+    
     const fetchQuestions = () => {
         fetch(`${APIURL}/topics/view-topic/${location.topic.id}`, {
             method: 'GET',
@@ -30,36 +32,46 @@ const Study = (props) => {
             .then(res => res.json()).then(data => { setQuestions(data.questions) })
     }
 
-    const goBack = () => {
-        history.goBack();
-    }
     const toggleInReview = (question) => {
+        question.review = !question.review;
         fetch(`${APIURL}/question/edit/${question.id}`, {
             method: 'PUT',
             body: JSON.stringify({
-                review: review
+                review: (question.review)
             }),
-            headers: new Headers({
+            headers: new Headers({  
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
             })
         })
-            .then(res => res.json()).then(data => { console.log('executed'); console.log(review) })
+            .then(res => res.json()).then(data => { console.log('executed'); })
     }
 
     const generateQuestions = () => {
         if (showReview) {
-            return (<p>in review test</p>);
-        } else {
             return (
-                questions.map((question) =>
-                    <div className='studyQuestionDiv'>
+                questions.filter(q => q.review).map(question => 
+                    <div className='studyQuestionDiv' key={question.id}>
                         <h3 className='studyQuestion'>{`Q: ${question.question}`}</h3>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <h4 className='studyAnswer'>{`A:   ${question.correctAnswer}`}</h4>
                             <div>
                                 <p>In review:</p>
-                                <Checkbox slider defaultChecked={question.review} onClick={() => { setReview(!question.review); toggleInReview(question) }} />
+                                <Checkbox slider defaultChecked onClick={() => { toggleInReview(question) }} />
+                            </div>
+                        </div>
+                    </div>)
+                    )
+        } else {
+            return (
+                questions.map((question) =>
+                    <div className='studyQuestionDiv' key={question.id}>
+                        <h3 className='studyQuestion'>{`Q: ${question.question}`}</h3>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <h4 className='studyAnswer'>{`A:   ${question.correctAnswer}`}</h4>
+                            <div>
+                                <p>In review:</p>
+                                <Checkbox slider defaultChecked={question.review} onClick={() => { toggleInReview(question) }} />
                             </div>
                         </div>
                     </div>
@@ -71,11 +83,11 @@ const Study = (props) => {
 
 
     return (
-        <div id='study'>
-            {/* {questions[0] !== undefined ? null : <div className='noFlashcards flashcardHeaders' ><h1>Topic: {location.topic.name}</h1><h1>Please go back and add some questions!</h1></div>} */}
             <Grid centered>
+        <div id='study'>
+            <Button basic className='studyBackButton' style={{marginTop: '3em', display:'block'}} color='yellow' onClick={goBack} >Go Back </Button>
+            {questions[0] !== undefined ? 
                 <div style={{ display: "flex", flexDirection: 'column' }}>
-                    <Button basic className='compBackButton' color='yellow' onClick={goBack} style={{ marginTop: '3em' }}>Go Back </Button>
                     <h1 className='header' style={{ marginBottom: '1em' }}>{`Topic: ${location.topic.name}`}</h1>
                     <Menu color='yellow' widths={2}>
                         <Menu.Item
@@ -94,8 +106,9 @@ const Study = (props) => {
                     </div>
 
                 </div>
-            </Grid>
+                : <div className='header' ><h1>Topic: {location.topic.name}</h1><h1>Please go back and add some questions!</h1></div>}
         </div>
+        </Grid>
     );
 }
 

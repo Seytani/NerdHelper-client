@@ -27,8 +27,8 @@ componentWillMount() {
 
 render() {
     return(
-        <Grid colums={2} centered>
-        <div className='authLanding' style={{display: 'flex'}}>
+        
+        <div className='authLanding' style={{display: 'flex', juustifyContent: 'center', alignItems: 'center'}}>
         <div className='authImage'>
             <div id='brand'></div>
             <div id='landingText'>
@@ -38,11 +38,9 @@ render() {
             <h3 className='landingSub'>Sign Up or Login to start studying</h3>
             </div>
         </div>
-        <Grid.Column>
         {this.state.login ? <Login toHome={this.toHome} toggleAuth={this.toggleAuth}/> : <SignUp toHome={this.toHome} toggleAuth={this.toggleAuth}/>}
-        </Grid.Column>
         </div>
-        </Grid>
+        
     );
 }}
 

@@ -8,6 +8,7 @@ import ManageQuestions from '../Questions/ManageQuestions';
 import Flashcard from '../Views/Flashcard';
 import APIURL from '../helpers/environment';
 import Study from '../Views/Study';
+import Quiz from '../Views/Quiz';
 
 export default class Topics extends Component {
     constructor(props) {
@@ -20,6 +21,7 @@ export default class Topics extends Component {
         this.toQuestion = this.toQuestion.bind(this);
         this.toFlashcards = this.toFlashcards.bind(this);
         this.toStudy = this.toStudy.bind(this);
+        this.toQuiz = this.toQuiz.bind(this);
         this.pullColumn = this.pullColumn.bind(this);
     }
 
@@ -65,11 +67,18 @@ export default class Topics extends Component {
             topic: currentTopic
         });
     }
+    toQuiz(id) {
+        let currentTopic = this.state.topics[this.state.topics.findIndex(element => element.id === id)];
+        this.props.history.push({
+            pathname: `${this.props.match.path}/${id}/quiz`,
+            topic: currentTopic
+        });
+    }
 
     pullColumn(topic) {
         return (
             <Grid.Column>
-                <TopicCard topic={topic} fetchTopics={this.fetchTopics} toQuestion={this.toQuestion} toFlashcards={this.toFlashcards} toStudy={this.toStudy}/>
+                <TopicCard topic={topic} fetchTopics={this.fetchTopics} toQuestion={this.toQuestion} toFlashcards={this.toFlashcards} toStudy={this.toStudy} toQuiz={this.toQuiz}/>
             </Grid.Column>
         )
     }
@@ -91,6 +100,7 @@ export default class Topics extends Component {
                     <Route path={`${this.props.match.path}/:topicId/questions`} component={ManageQuestions} />
                     <Route path={`${this.props.match.path}/:topicId/flashcards`} component={Flashcard} />
                     <Route path={`${this.props.match.path}/:topicId/study`} component={Study} />
+                    <Route path={`${this.props.match.path}/:topicId/quiz`} component={Quiz} />
                 </Switch>
             </div>
         )

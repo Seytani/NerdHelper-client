@@ -5,7 +5,6 @@ import APIURL from '../helpers/environment';
 
 const Flashcard = (props) => {
     const [questions, setQuestions] = useState([]);
-    const [review, setReview] = useState(false);
     const location = useLocation();
     const history = useHistory();
 
@@ -29,14 +28,14 @@ const Flashcard = (props) => {
         fetch(`${APIURL}/question/edit/${question.id}`, {
             method: 'PUT',
             body: JSON.stringify({
-                review: review
+                review: (!question.review)
             }),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
             })
         })
-            .then(res => res.json()).then(data => {  })
+            .then(res => res.json()).then(data => {})
     }
 
     const goBack = () => {
@@ -89,7 +88,7 @@ const Flashcard = (props) => {
                                                             <h3 className='flashcardText'>{question.correctAnswer}</h3>
                                                             <div>
                                                                 <p>In review:</p>
-                                                                <Checkbox slider defaultChecked={question.review} onClick={() => {setReview(!question.review); toggleInReview(question)}}/>
+                                                                <Checkbox slider defaultChecked={question.review} onClick={() => {toggleInReview(question)}}/>
                                                             </div>
                                                         </div>
                                                     </Reveal.Content>

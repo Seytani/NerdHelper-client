@@ -2,6 +2,7 @@ body {
   margin: 0px;
   padding: 0px;
   background-color: rgb(245, 245, 245);
+  height: 100%;
 }
 /* LANDING/AUTH */
 
@@ -25,28 +26,33 @@ body {
 }
 
 .authLanding {
-  width: 95%;
-  height: 70em;
-  margin: 4em;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 70%;
+  height: 65em;
+  margin: auto;
   border-radius: 30px;
   box-shadow: 10px 5px 5px #E0E1E2;
 }
 
 .authImage {
-  width: 50%;
-  /* height: 60em; */
+  width: 55%;
+  height: 94%;
+  padding: 1em;
   margin-top: 4em;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
   /* background-image: url(./assets/nerdpal_landing3.png); */
   background: linear-gradient(#29335C, #db2b39, #f3a712);
 }
+#landingText {
+  padding-left: 4em;
+}
 
 .authForms {
-  position: relative;
-  left: 20em;
-  top: 5em;
-  width: 100%;
+  padding-left: 5em;
+  text-align: center;
+  width: 30%;
   margin: 4em;
 }
 
@@ -73,6 +79,7 @@ body {
   background-color: none;
   border: none;
 }
+
 
 /* TOPICS */
 
@@ -214,7 +221,6 @@ margin: auto;
 .topicCardManageButton {
   display: flex;
   justify-content: flex-end;
-  padding: ;
 }
 
 /* MANAGE QUESTIONS */
@@ -254,8 +260,8 @@ margin: auto;
 
 /* FLASHCARD */
 
-.compBackButton {
-  display: block;
+.studyBackButton {
+
 }
 
 .flashcardComponent {
@@ -334,4 +340,50 @@ margin: auto;
   to {
     transform: rotate(360deg);
   }
+}
+
+/* QUIZ */
+
+#quiz {
+  width: 45%;
+  margin: auto;
+}
+#quiz li {
+  list-style: none;
+}
+
+.quizElement {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+align-items: flex-start;
+  margin-top: 3em;
+}
+
+.quizQuestion {
+  text-align: start;
+  font-size: 1.5em;
+}
+
+.quizAnswers {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+align-items: flex-start;
+margin-bottom: 2em;
+padding-left: 2em;
+}
+
+.quizRadio {
+  padding: 0.2em;
+}
+
+.button {
+  padding: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+  border-radius: 15px;
+  border: none;
+  margin: 3em;
+  color: white;
 }
