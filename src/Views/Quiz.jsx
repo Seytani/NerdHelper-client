@@ -44,7 +44,7 @@ const Quiz = (props) => {
                 }),
                 body: JSON.stringify({ questions, answers}),
             })
-            .then(res => res.json()).then(data => {alert(`You scored ${data.score}.`);  goBack()});
+            .then(res => res.json()).then(data => {alert(`You scored ${data.score}%.`);  goBack()});
         };
     
     const goBack = () => {
