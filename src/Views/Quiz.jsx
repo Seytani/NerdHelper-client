@@ -106,7 +106,7 @@ const Quiz = (props) => {
     
 
     const handleSubmitClick = () => {
-        const isQuizAnswered = answers.reduce((acc, next) => ( next.length > 0));
+        const isQuizAnswered = answers.reduce((acc, next) => ( acc && next.length > 0));
         if (!isQuizAnswered) {
             alert('Please answer all questions.');
             return;
