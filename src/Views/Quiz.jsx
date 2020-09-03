@@ -8,12 +8,12 @@ const Quiz = (props) => {
     const [answers, setAnswers] = useState([]);
     const location = useLocation();
     const history = useHistory();
-
+    
     useEffect(() => {
         console.log('FROM QUIZ', location.topic.id)
         fetchQuestions();
     }, [])
-
+    
     const fetchQuestions = () => {
         fetch(`${APIURL}/topics/view-topic/${location.topic.id}`, {
             method: 'GET',
@@ -22,14 +22,31 @@ const Quiz = (props) => {
                 'Authorization': localStorage.getItem('token')
             })
         })
-        .then(res => res.json()).then(data => { setupQuestionAndAnswers(data.questions)});
+        .then(res => res.json()).then(data => { setupQuestionAndAnswers(data.questions);});
     }
-
+    
     const setupQuestionAndAnswers = questions => {
         setQuestions(scramble(questions));
         setAnswers(questions.map(q => ('')));
     }
-
+    
+        const handleSubmitClick = () => {
+            const isQuizAnswered = answers.reduce((acc, next) => ( acc && next.length > 0));
+            if (!isQuizAnswered) {
+                alert('Please answer all questions.');
+                return;
+            }
+            fetch(`${APIURL}/quiz`, {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem('token')
+                }),
+                body: JSON.stringify({ questions, answers}),
+            })
+            .then(res => res.json()).then(data => {alert(`You scored ${data.score}.`);  goBack()});
+        };
+    
     const goBack = () => {
         history.goBack();
     }
@@ -58,7 +75,6 @@ const Quiz = (props) => {
     let handleChangeAnswer = (e, { value, index }) => {
         const copyAnswers = answers.slice();
         copyAnswers[index] = value;
-        console.log('change!!!!', copyAnswers);
         setAnswers(copyAnswers);
     };
 
@@ -82,8 +98,7 @@ const Quiz = (props) => {
         return questionDom;
     }
     let generateAnswersDom = (index, question) => {
-        let questionAnswers = [question.incorrectAnswer_1, question.incorrectAnswer_2, question.incorrectAnswer_3, question.correctAnswer]
-        questionAnswers = (scramble(questionAnswers));
+        let questionAnswers = [question.incorrectAnswer_1, question.incorrectAnswer_2, question.incorrectAnswer_3, question.correctAnswer];
         const answersDom = []
         for (const answer of questionAnswers) {
             answersDom.push(
@@ -104,23 +119,6 @@ const Quiz = (props) => {
     }
 
     
-
-    const handleSubmitClick = () => {
-        const isQuizAnswered = answers.reduce((acc, next) => ( acc && next.length > 0));
-        if (!isQuizAnswered) {
-            alert('Please answer all questions.');
-            return;
-        }
-        fetch(`${APIURL}/quiz`, {
-            method: 'POST',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
-            }),
-            body: JSON.stringify({ questions, answers}),
-        })
-        .then(resp => console.log(resp));
-    };
 
     return(
         <Grid centered>
